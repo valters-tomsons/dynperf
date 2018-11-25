@@ -21,3 +21,7 @@ Launch `dynperf-server` once, so it can generate the configuration file and defa
 `KillProcess` - Process name to kill when a target process is found -- e.g. `compton`
 
 `RestoreCommand` - Bash command that will be launched when there are none target processes running -- e.g. `compton --config ~/.compton.conf`
+
+# Requirements
+- This application is targeting `.NET Core 2.1`
+- Bash at `/bin/bash`, this could be changed pretty easily tho
