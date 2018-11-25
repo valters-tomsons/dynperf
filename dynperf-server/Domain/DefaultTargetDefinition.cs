@@ -8,6 +8,7 @@ namespace dynperf_server.Domain
         public static readonly List<TargetProcessEntry> DefaultsList = new List<TargetProcessEntry>()
         {
             new TargetProcessEntry("League of Legen") { Description = "League of Legends" },
+            new TargetProcessEntry("dota2") { Description = "Dota 2" },
         };
     }
 }
