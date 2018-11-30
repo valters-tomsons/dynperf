@@ -9,6 +9,8 @@ namespace dynperf_server.Domain
         {
             new TargetProcessEntry("League of Legen") { Description = "League of Legends" },
             new TargetProcessEntry("dota2") { Description = "Dota 2" },
+            new TargetProcessEntry("Cemu") { Description = "Cemu (Wii U Emulator)"},
+            new TargetProcessEntry("rpcs3") { Description = "RPCS3 (Playstation 3 Emulator)"},
         };
     }
 }
