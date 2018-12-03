@@ -12,7 +12,7 @@ Contains general settings, like restore script (executes a bash command) and pro
 ### targets.json
 Contains a list of target processes (games, for example) to watch.    
 
-Note: This file is watched at runtime, so after updating targets, you do not need to restart dynperf.
+``Note: This file is watched at runtime, so after updating targets, you do not need to restart dynperf.``
 
 `ProcessName` : Process name for which dynperf will look    
 `Description` : Optional process description, because sometimes process names may be vague
