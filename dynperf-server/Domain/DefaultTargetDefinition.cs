@@ -12,6 +12,7 @@ namespace dynperf_server.Domain
             new TargetProcessEntry("Cemu") { Description = "Cemu (Wii U Emulator)"},
             new TargetProcessEntry("rpcs3") { Description = "RPCS3 (Playstation 3 Emulator)"},
             new TargetProcessEntry("retroarch") { Description = "Retroarch Emulator Frontend"},
+            new TargetProcessEntry("Vainglory.exe") { Description = "Vainglory"},
         };
     }
 }
