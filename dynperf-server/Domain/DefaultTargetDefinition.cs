@@ -13,6 +13,7 @@ namespace dynperf_server.Domain
             new TargetProcessEntry("rpcs3") { Description = "RPCS3 (Playstation 3 Emulator)"},
             new TargetProcessEntry("retroarch") { Description = "Retroarch Emulator Frontend"},
             new TargetProcessEntry("Vainglory.exe") { Description = "Vainglory"},
+            new TargetProcessEntry("csgo_linux64") { Description = "Counter-Strike: Global Offensive"},
         };
     }
 }
