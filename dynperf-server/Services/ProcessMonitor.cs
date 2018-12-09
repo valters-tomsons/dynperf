@@ -14,19 +14,7 @@ namespace dynperf_server.Services
             _targetPrograms = targetPrograms;
         }
 
-        public bool IsAnyTargetProcessRunning()
-        {
-            var targetPrograms = GetAllRunningTargetPrograms();
-
-            if (targetPrograms.Count > 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private List<Process> GetAllRunningTargetPrograms()
+        public List<Process> GetAllRunningTargetPrograms()
         {
             var processes = Process.GetProcesses();
             var targetProcesses = processes.Where(x => FilterTarget(x)).ToList();

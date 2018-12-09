@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Timers;
@@ -35,8 +36,11 @@ namespace dynperf_server.Services
 
         private void ServiceTimerTick(object sender, ElapsedEventArgs e)
         {
-            if (_processMonitor.IsAnyTargetProcessRunning())
+            var runningProcesses = _processMonitor.GetAllRunningTargetPrograms();
+
+            if (runningProcesses.Count > 0)
             {
+                PrintProcesses(runningProcesses);
                 KillProcess();
             }
             else
@@ -45,6 +49,14 @@ namespace dynperf_server.Services
                 {
                     RestoreProcess();
                 }
+            }
+        }
+
+        private void PrintProcesses(List<Process> processes)
+        {
+            foreach (var proc in processes)
+            {
+                System.Console.WriteLine($"Found Process: {proc.ProcessName}");
             }
         }
 
@@ -61,6 +73,8 @@ namespace dynperf_server.Services
 
         private void RestoreProcess()
         {
+            System.Console.WriteLine("Restoring process");
+
             isKilled = false;
             var restoreCmd = _configuration.RestoreCommand;
 
