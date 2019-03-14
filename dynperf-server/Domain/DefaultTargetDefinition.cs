@@ -13,6 +13,7 @@ namespace dynperf_server.Domain
             new TargetProcessEntry("retroarch") { Description = "Retroarch Emulator Frontend"},
             new TargetProcessEntry("Vainglory.exe") { Description = "Vainglory"},
             new TargetProcessEntry("gameoverlayui") { Description = "Steam In-Game Overlay"},
+            new TargetProcessEntry("Civ6") { Description = "Civilization VI"},
         };
     }
 }
