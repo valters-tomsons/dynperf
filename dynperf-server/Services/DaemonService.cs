@@ -54,9 +54,12 @@ namespace dynperf_server.Services
 
         private void PrintProcesses(List<Process> processes)
         {
-            foreach (var proc in processes)
+            if (_configuration.PrintStatusMessages)
             {
-                System.Console.WriteLine($"Found Process: {proc.ProcessName}");
+                foreach (var proc in processes)
+                {
+                    System.Console.WriteLine($"Found Process: {proc.ProcessName}");
+                }
             }
         }
 
@@ -73,7 +76,10 @@ namespace dynperf_server.Services
 
         private void RestoreProcess()
         {
-            System.Console.WriteLine("Restoring process");
+            if (_configuration.PrintStatusMessages)
+            {
+                System.Console.WriteLine("Restoring process");
+            }
 
             isKilled = false;
             var restoreCmd = _configuration.RestoreCommand;
