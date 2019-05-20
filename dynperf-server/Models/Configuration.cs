@@ -4,7 +4,7 @@ namespace dynperf_server.Models
 {
     public class Configuration
     {
-        public static string ConfigurationFolder = $"{Environment.GetEnvironmentVariable("HOME")}/.dynperf-server";
+        public static string ConfigurationFolder = $"{Environment.GetEnvironmentVariable("HOME")}/.config/dynperf";
 
         public Configuration()
         {
@@ -13,6 +13,7 @@ namespace dynperf_server.Models
             KillProcess = "compton";
             RestoreCommand = "compton --config ~/.config/compton.conf";
             ScanIntervalMs = 1500;
+            PrintStatusMessages = false;
         }
 
         public string TargetListFilePath { get; set; }
@@ -20,5 +21,6 @@ namespace dynperf_server.Models
         public string KillProcess { get; set; }
         public string RestoreCommand { get; set; }
         public double ScanIntervalMs { get; set; }
+        public bool PrintStatusMessages { get; set; }
     }
 }
