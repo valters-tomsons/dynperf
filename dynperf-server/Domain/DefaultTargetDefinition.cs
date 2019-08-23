@@ -14,6 +14,7 @@ namespace dynperf_server.Domain
             new TargetProcessEntry("Vainglory.exe") { Description = "Vainglory"},
             new TargetProcessEntry("gameoverlayui") { Description = "Steam In-Game Overlay"},
             new TargetProcessEntry("Civ6") { Description = "Civilization VI"},
+            new TargetProcessEntry("sekiro.exe") { Description = "Sekiro Shadows Die Twice"}
         };
     }
 }
