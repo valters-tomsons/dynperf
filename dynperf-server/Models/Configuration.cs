@@ -4,7 +4,7 @@ namespace dynperf_server.Models
 {
     public class Configuration
     {
-        public static string ConfigurationFolder = $"{Environment.GetEnvironmentVariable("HOME")}/.config/dynperf";
+        public static string ConfigurationFolder = $"{Environment.GetEnvironmentVariable("HOME")}/.local/share/dynperf";
 
         public Configuration()
         {
