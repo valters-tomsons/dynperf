@@ -5,7 +5,7 @@ This application watches when a defined process is running, kills another proces
 This was created so I can kill compton (window compositor) when playing video games, because it introduces unnecessary input lag and I don't need the fancy visuals while playing.
 
 # Usage
-Configuration files are saved in `~/.dynperf-server` that includes:
+Configuration files are saved in `~/.local/share/dynperf` that includes:
 ### config.json
 Contains general settings, like restore script (executes a bash command) and process scan interval etc.
     
