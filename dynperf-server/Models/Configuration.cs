@@ -17,7 +17,6 @@ namespace dynperf_server.Models
         }
 
         public string TargetListFilePath { get; set; }
-
         public string KillProcess { get; set; }
         public string RestoreCommand { get; set; }
         public double ScanIntervalMs { get; set; }
