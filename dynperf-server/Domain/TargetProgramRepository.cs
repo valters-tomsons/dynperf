@@ -64,12 +64,7 @@ namespace dynperf_server.Domain
 
         private void WriteDefaultTargets()
         {
-            using(var writer = File.CreateText(_configuration.TargetListFilePath))
-            {
-                var serializer = new JsonSerializer();
-                serializer.Formatting = Formatting.Indented;
-                serializer.Serialize(writer, DefaultTargetDefinition.DefaultsList);
-            }
+            File.Copy("Defaults/targets.json", _configuration.TargetListFilePath);
         }
     }
 }
