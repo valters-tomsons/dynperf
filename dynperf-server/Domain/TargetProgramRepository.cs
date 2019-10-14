@@ -28,10 +28,12 @@ namespace dynperf_server.Domain
 
         private void InitializeFileWatcher()
         {
-            FileWatcher = new FileSystemWatcher();
-            FileWatcher.Path = Configuration.ConfigurationFolder;
-            FileWatcher.Filter = "targets.json";
-            FileWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            FileWatcher = new FileSystemWatcher
+            {
+                Path = Configuration.ConfigurationFolder,
+                Filter = "targets.json",
+                NotifyFilter = NotifyFilters.LastWrite
+            };
 
             FileWatcher.Changed += OnTargetsFileChange;
             FileWatcher.EnableRaisingEvents = true;
