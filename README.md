@@ -25,5 +25,5 @@ Launch `dynperf-server` once, so it can generate the configuration file and defa
 `RestoreCommand` - Bash command that will be launched when there are none target processes running -- e.g. `compton --config ~/.compton.conf`
 
 # Requirements
-- This application is targeting `.NET Core 2.1`
+- This application is targeting `.NET Core 3.0`
 - Bash at `/bin/bash`, this could be changed pretty easily tho
