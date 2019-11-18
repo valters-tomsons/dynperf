@@ -1,6 +1,6 @@
 using System.IO;
+using System.Text.Json;
 using dynperf_server.Models;
-using Newtonsoft.Json;
 
 namespace dynperf_server.Services
 {
@@ -19,7 +19,7 @@ namespace dynperf_server.Services
         {
             if (File.Exists(ConfigFile))
             {
-                return JsonConvert.DeserializeObject<Configuration>(File.ReadAllText(ConfigFile));
+                return JsonSerializer.Deserialize<Configuration>(File.ReadAllText(ConfigFile));
             }
             else
             {
@@ -35,12 +35,16 @@ namespace dynperf_server.Services
 
             var defaultConfig = new Configuration();
 
-            using(var writer = File.CreateText(ConfigFile))
+            var options = new JsonSerializerOptions
             {
-                var serializer = new JsonSerializer();
-                serializer.Formatting = Formatting.Indented;
-                serializer.Serialize(writer, defaultConfig);
-            }
+                WriteIndented = true,
+                AllowTrailingCommas = true
+            };
+
+            var configJson = JsonSerializer.Serialize(defaultConfig, options);
+            File.WriteAllText(ConfigFile, configJson);
+
+            System.Console.WriteLine(configJson);
         }
 
     }

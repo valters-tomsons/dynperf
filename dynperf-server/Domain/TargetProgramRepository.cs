@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
+using System.Text.Json;
 using dynperf_server.Models;
-using Newtonsoft.Json;
 
 namespace dynperf_server.Domain
 {
@@ -48,17 +47,22 @@ namespace dynperf_server.Domain
 
         private List<TargetProcessEntry> LoadTargetList()
         {
+
             var targetsFile = _configuration.TargetListFilePath;
 
             if (File.Exists(_configuration.TargetListFilePath))
             {
-                return JsonConvert.DeserializeObject<List<TargetProcessEntry>>(File.ReadAllText(targetsFile));
+                var targetInput = File.ReadAllText(targetsFile);
+                var serializedInput = JsonSerializer.Deserialize<List<TargetProcessEntry>>(targetInput);
+                Console.WriteLine($"targets file with {serializedInput.Count} targets loaded");
+                return serializedInput;
             }
             else
             {
                 WriteDefaultTargets();
             }
 
+            Console.WriteLine("Default targets file loaded");
             return new List<TargetProcessEntry>();
         }
 

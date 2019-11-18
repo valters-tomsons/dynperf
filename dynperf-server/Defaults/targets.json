@@ -1,6 +1,6 @@
 [
     {
-      "ProcessName": "League of Legen",
+      "ProcessName": "League of Legends",
       "Description": "League of Legends"
     },
     {
@@ -38,5 +38,17 @@
     {
       "ProcessName": "bfvTrial.exe",
       "Description": "Battlefield V (Trial)"
+    },
+    {
+      "ProcessName": "bfv.exe",
+      "Description": "Battlefield V)"
+    },
+    {
+      "ProcessName": "Titanfall2.exe",
+      "Description": "Titanfall 2"
+    },
+    {
+      "ProcessName": "ShadowOfTheTombRaider",
+      "Description": "Shadow of the Tomb Raider"
     }
   ]

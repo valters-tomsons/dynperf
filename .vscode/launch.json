@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/dynperf-server/bin/Debug/netcoreapp2.1/dynperf-server.dll",
+            "program": "${workspaceFolder}/dynperf-server/bin/Debug/netcoreapp3.0/dynperf-server.dll",
             "args": [],
             "cwd": "${workspaceFolder}/dynperf-server",
             "console": "internalConsole",

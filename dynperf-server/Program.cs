@@ -7,7 +7,7 @@ namespace dynperf_server
 {
     class Program
     {
-        static ManualResetEvent _quitEvent = new ManualResetEvent(false);
+        static readonly ManualResetEvent _quitEvent = new ManualResetEvent(false);
 
         static void Main(string[] args)
         {
@@ -18,12 +18,12 @@ namespace dynperf_server
             };
 
             new Dynperf();
-            System.Console.WriteLine("Dynperf Daemon service running!");
+            System.Console.WriteLine("Dynperf running!");
 
             _quitEvent.WaitOne();
 
             System.Console.WriteLine();
-            System.Console.WriteLine("Dynperf service stopped.");
+            System.Console.WriteLine("Stopping dynperf...");
         }
     }
 }

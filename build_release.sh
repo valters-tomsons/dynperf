@@ -1,2 +1,2 @@
 #!/bin/sh
-dotnet publish -c Release -p dynperf-server -o Release
+dotnet publish -c Release -o Release

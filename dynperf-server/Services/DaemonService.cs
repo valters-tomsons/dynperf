@@ -24,6 +24,7 @@ namespace dynperf_server.Services
 
         public void Start()
         {
+            RestoreProcess();
             ServiceTimer.Start();
         }
 
@@ -40,25 +41,18 @@ namespace dynperf_server.Services
 
             if (runningProcesses.Count > 0)
             {
-                PrintProcesses(runningProcesses);
+                if (!isKilled)
+                {
+                    System.Console.WriteLine($"found {runningProcesses.Count} targets running!");
+                }
                 KillProcess();
             }
             else
             {
                 if (isKilled)
                 {
+                    System.Console.WriteLine("0 targets found, restoring");
                     RestoreProcess();
-                }
-            }
-        }
-
-        private void PrintProcesses(List<Process> processes)
-        {
-            if (_configuration.PrintStatusMessages)
-            {
-                foreach (var proc in processes)
-                {
-                    System.Console.WriteLine($"Found Process: {proc.ProcessName}");
                 }
             }
         }
@@ -76,11 +70,6 @@ namespace dynperf_server.Services
 
         private void RestoreProcess()
         {
-            if (_configuration.PrintStatusMessages)
-            {
-                System.Console.WriteLine("Restoring process");
-            }
-
             isKilled = false;
             var restoreCmd = _configuration.RestoreCommand;
 
