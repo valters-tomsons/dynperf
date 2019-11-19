@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
 using System.Timers;
 using dynperf_server.Models;
 
@@ -30,8 +28,11 @@ namespace dynperf_server.Services
 
         private void InitializeTimer()
         {
-            ServiceTimer = new System.Timers.Timer();
-            ServiceTimer.Interval = _configuration.ScanIntervalMs;
+            ServiceTimer = new System.Timers.Timer
+            {
+                Interval = _configuration.ScanIntervalMs
+            };
+
             ServiceTimer.Elapsed += ServiceTimerTick;
         }
 
@@ -43,7 +44,7 @@ namespace dynperf_server.Services
             {
                 if (!isKilled)
                 {
-                    System.Console.WriteLine($"found {runningProcesses.Count} targets running!");
+                    Console.WriteLine($"found {runningProcesses.Count} targets running");
                 }
                 KillProcess();
             }
@@ -51,7 +52,7 @@ namespace dynperf_server.Services
             {
                 if (isKilled)
                 {
-                    System.Console.WriteLine("0 targets found, restoring");
+                    Console.WriteLine("0 targets found, restoring");
                     RestoreProcess();
                 }
             }
