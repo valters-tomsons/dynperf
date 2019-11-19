@@ -1,0 +1,11 @@
+[Unit]
+Description=Dynamic Compositor Manager
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+ExecStart=/opt/dynperf/dynperf-server
+
+[Install]
+WantedBy=xinitrc.target
