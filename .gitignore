@@ -17,3 +17,5 @@ bld/
 [Oo]bj/
 [Ll]og/
 
+# Dynperf Release Artifacts
+./dynperf-release/*
