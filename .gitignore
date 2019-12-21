@@ -18,4 +18,4 @@ bld/
 [Ll]og/
 
 # Dynperf Release Artifacts
-./dynperf-release/*
+dynperf-release/*
