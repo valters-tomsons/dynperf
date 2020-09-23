@@ -24,6 +24,8 @@ namespace dynperf
         {
             const int delay = 1500;
 
+            TryStartPicom();
+
             while (!stoppingToken.IsCancellationRequested)
             {
                 var proc = _monitor.RunningTargetCount();
