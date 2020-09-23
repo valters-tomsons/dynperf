@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dynperf-server", "dynperf-server\dynperf-server.csproj", "{DF4F66D6-8CA7-4352-81E5-9C0B4122A720}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4C22B817-8F7B-469B-BDF1-B620477E9772}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dynperf", "src\dynperf\dynperf.csproj", "{20D4E7E1-ECFA-4959-8A56-F41149267EAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,20 @@ Global
 		{DF4F66D6-8CA7-4352-81E5-9C0B4122A720}.Release|x64.Build.0 = Release|Any CPU
 		{DF4F66D6-8CA7-4352-81E5-9C0B4122A720}.Release|x86.ActiveCfg = Release|Any CPU
 		{DF4F66D6-8CA7-4352-81E5-9C0B4122A720}.Release|x86.Build.0 = Release|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Debug|x64.Build.0 = Debug|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Debug|x86.Build.0 = Debug|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Release|x64.ActiveCfg = Release|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Release|x64.Build.0 = Release|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Release|x86.ActiveCfg = Release|Any CPU
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{20D4E7E1-ECFA-4959-8A56-F41149267EAC} = {4C22B817-8F7B-469B-BDF1-B620477E9772}
 	EndGlobalSection
 EndGlobal
