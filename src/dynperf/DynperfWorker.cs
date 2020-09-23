@@ -2,7 +2,6 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using dynperf.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -11,21 +10,19 @@ namespace dynperf
     public class DynperfWorker : BackgroundService
     {
         private readonly ILogger<DynperfWorker> _logger;
-        private readonly IConfigurationRoot _config;
         private readonly TargetProcessMonitor _monitor;
 
-        private bool PerformanceMode = false;
+        private bool PerformanceMode;
 
-        public DynperfWorker(ILogger<DynperfWorker> logger, IConfigurationRoot config, TargetProcessMonitor monitor)
+        public DynperfWorker(ILogger<DynperfWorker> logger, TargetProcessMonitor monitor)
         {
             _logger = logger;
-            _config = config;
             _monitor = monitor;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var delay = _config.GetValue("ScanIntervalMs", 1500);
+            const int delay = 1500;
 
             while (!stoppingToken.IsCancellationRequested)
             {
@@ -56,6 +53,8 @@ namespace dynperf
 
         private void KillPicom()
         {
+            _logger.LogInformation("Killing picom");
+
             foreach (Process proc in Process.GetProcessesByName("picom"))
             {
                 proc.Kill();

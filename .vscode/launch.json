@@ -9,12 +9,11 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/dynperf-server/bin/Debug/netcoreapp3.0/dynperf-server.dll",
+            "program": "${workspaceFolder}/src/dynperf/bin/Debug/netcoreapp3.1/dynperf.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/dynperf-server",
+            "cwd": "${workspaceFolder}/src/dynperf",
             "console": "internalConsole",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart"
+            "stopAtEntry": false
         },
         {
             "name": ".NET Core Attach",

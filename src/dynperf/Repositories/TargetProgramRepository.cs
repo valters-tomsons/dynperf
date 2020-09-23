@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
-using dynperf_server.Models;
+using dynperf.Models;
+using Microsoft.Extensions.Logging;
 
-namespace dynperf_server.Domain
+namespace dynperf.Repositories
 {
     public class TargetProgramRepository
     {
-        private readonly Configuration _configuration;
         private List<TargetProcessEntry> TargetProcessEntries { get; set; }
         private FileSystemWatcher FileWatcher { get; set; }
 
-        public TargetProgramRepository(Configuration configuration)
+        private readonly ILogger<DynperfWorker> _logger;
+
+        private static readonly string ConfigurationFolder = $"{Environment.GetEnvironmentVariable("HOME")}/.local/share/dynperf";
+        private const string TargetsFileName = "targets.json";
+
+        public TargetProgramRepository(ILogger<DynperfWorker> logger)
         {
-            _configuration = configuration;
+            _logger = logger;
+
             TargetProcessEntries = LoadTargetList();
             InitializeFileWatcher();
         }
@@ -29,8 +35,8 @@ namespace dynperf_server.Domain
         {
             FileWatcher = new FileSystemWatcher
             {
-                Path = Configuration.ConfigurationFolder,
-                Filter = "targets.json",
+                Path = ConfigurationFolder,
+                Filter = TargetsFileName,
                 NotifyFilter = NotifyFilters.LastWrite
             };
 
@@ -40,21 +46,21 @@ namespace dynperf_server.Domain
 
         private void OnTargetsFileChange(object sender, FileSystemEventArgs e)
         {
-            System.Console.WriteLine("Targets file change detected, loading");
-            var newList = LoadTargetList();
-            TargetProcessEntries = newList;
+            _logger.LogInformation("Targets file change detected, loading");
+            TargetProcessEntries = LoadTargetList();
         }
 
         private List<TargetProcessEntry> LoadTargetList()
         {
+            var targetsFile = $"{ConfigurationFolder}/{TargetsFileName}";
 
-            var targetsFile = _configuration.TargetListFilePath;
-
-            if (File.Exists(_configuration.TargetListFilePath))
+            if (File.Exists(targetsFile))
             {
                 var targetInput = File.ReadAllText(targetsFile);
                 var serializedInput = JsonSerializer.Deserialize<List<TargetProcessEntry>>(targetInput);
-                Console.WriteLine($"targets file with {serializedInput.Count} targets loaded");
+
+                _logger.LogInformation($"targets file with {serializedInput.Count} targets loaded");
+
                 return serializedInput;
             }
             else
@@ -62,13 +68,14 @@ namespace dynperf_server.Domain
                 WriteDefaultTargets();
             }
 
-            Console.WriteLine("Default targets file loaded");
+            _logger.LogInformation("Default targets file loaded");
             return new List<TargetProcessEntry>();
         }
 
         private void WriteDefaultTargets()
         {
-            File.Copy("Defaults/targets.json", _configuration.TargetListFilePath);
+            var targetsFile = $"{ConfigurationFolder}/{TargetsFileName}";
+            File.Copy("Defaults/targets.json", targetsFile);
         }
     }
 }

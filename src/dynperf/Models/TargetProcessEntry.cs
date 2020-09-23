@@ -1,4 +1,4 @@
-namespace dynperf_server.Models
+namespace dynperf.Models
 {
     public class TargetProcessEntry
     {
@@ -11,6 +11,5 @@ namespace dynperf_server.Models
 
         public string ProcessName { get; set; }
         public string Description { get; set; }
-
     }
 }

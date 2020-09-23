@@ -1,6 +1,5 @@
-using System;
+using dynperf.Repositories;
 using dynperf.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -18,9 +17,10 @@ namespace dynperf
                 .UseSystemd()
                 .ConfigureServices((_, services) =>
                 {
-                    services.AddHostedService<DynperfWorker>();
+                    services.AddSingleton<TargetProgramRepository>();
                     services.AddSingleton<TargetProcessMonitor>();
-                    services.AddSingleton(_ => new ConfigurationBuilder().SetBasePath(Environment.CurrentDirectory).AddJsonFile("appsettings.json", optional: false).Build());
+
+                    services.AddHostedService<DynperfWorker>();
                 });
     }
 }
