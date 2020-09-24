@@ -14,6 +14,9 @@ if ! test -f "$FILE"; then
     exit
 fi
 
-# Copy binary
-cd bin
-cp dynperf /usr/bin/dynperf
+cd bin || exit
+
+TARGET=/usr/bin/dynperf
+cp dynperf "$TARGET" || { echo -e "\e[31mFailed to copy binary"; exit 1; }
+
+echo "Installed dynperf release binary to $TARGET"
