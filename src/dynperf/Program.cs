@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Linq;
 using dynperf.Repositories;
@@ -14,12 +13,7 @@ namespace dynperf
         {
             if (args.Length > 0 && args.Contains("-kill"))
             {
-                var procId = Process.GetCurrentProcess().Id;
-                var processes = Process.GetProcessesByName("dynperf").Where(x => x.Id != procId).ToList();
-
-                System.Console.WriteLine($"Killing {processes.Count} processes.");
-
-                processes.ForEach(x => x.Kill());
+                KillAllDynperfProcesses();
                 return;
             }
 
@@ -36,5 +30,15 @@ namespace dynperf
 
                     services.AddHostedService<DynperfWorker>();
                 });
+
+        private static void KillAllDynperfProcesses()
+        {
+            var procId = Process.GetCurrentProcess().Id;
+            var processes = Process.GetProcessesByName("dynperf").Where(x => x.Id != procId).ToList();
+
+            System.Console.WriteLine($"Killing {processes.Count} processes.");
+
+            processes.ForEach(x => x.Kill());
+        }
     }
 }
