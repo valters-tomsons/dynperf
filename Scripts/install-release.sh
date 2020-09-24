@@ -18,5 +18,7 @@ cd bin || exit
 
 TARGET=/usr/bin/dynperf
 cp dynperf "$TARGET" || { echo -e "\e[31mFailed to copy binary"; exit 1; }
-
 echo "Installed dynperf release binary to $TARGET"
+
+cp "dynperf.1.gz" "/usr/share/man/man1/dynperf.1.gz" || { echo -e "\e[31mFailed to copy man page"; exit 1; }
+echo "man page installed"
