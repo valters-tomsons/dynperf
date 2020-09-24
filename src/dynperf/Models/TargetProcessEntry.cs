@@ -9,6 +9,12 @@ namespace dynperf.Models
             ProcessName = processName;
         }
 
+        public TargetProcessEntry(string processName, string description)
+        {
+            ProcessName = processName;
+            Description = description;
+        }
+
         public string ProcessName { get; set; }
         public string Description { get; set; }
     }

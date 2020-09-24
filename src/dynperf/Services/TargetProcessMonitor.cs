@@ -1,21 +1,26 @@
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using dynperf.Repositories;
+using dynperf.Models;
 
 namespace dynperf.Services
 {
     public class TargetProcessMonitor
     {
         private readonly TargetProgramRepository _targetRepo;
+        private ReadOnlyCollection<TargetProcessEntry> _targets { get; set; }
 
         public TargetProcessMonitor(TargetProgramRepository targetRepo)
         {
             _targetRepo = targetRepo;
         }
 
-        public int RunningTargetCount()
+        public async Task<int> RunningTargetCount()
         {
+            _targets = await _targetRepo.GetEntries().ConfigureAwait(false);
             return MonitorProcesses().Count();
         }
 
@@ -28,8 +33,7 @@ namespace dynperf.Services
 
         private bool FilterTarget(Process target)
         {
-            var targets = _targetRepo.GetEntries();
-            return targets.Any(x => target.ProcessName.Equals(x.ProcessName));
+            return _targets.Any(x => target.ProcessName.Equals(x.ProcessName));
         }
     }
 }
