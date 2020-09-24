@@ -1,3 +1,6 @@
+using System.Runtime.CompilerServices;
+using System.Diagnostics;
+using System.Linq;
 using dynperf.Repositories;
 using dynperf.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +12,17 @@ namespace dynperf
     {
         public static void Main(string[] args)
         {
+            if (args.Length > 0 && args.Contains("-kill"))
+            {
+                var procId = Process.GetCurrentProcess().Id;
+                var processes = Process.GetProcessesByName("dynperf").Where(x => x.Id != procId).ToList();
+
+                System.Console.WriteLine($"Killing {processes.Count} processes.");
+
+                processes.ForEach(x => x.Kill());
+                return;
+            }
+
             CreateHostBuilder(args).Build().Run();
         }
 
