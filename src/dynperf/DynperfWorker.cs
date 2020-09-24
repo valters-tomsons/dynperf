@@ -28,7 +28,7 @@ namespace dynperf
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                var proc = _monitor.RunningTargetCount();
+                var proc = await _monitor.RunningTargetCount().ConfigureAwait(false);
 
                 if(proc > 0 && !PerformanceMode)
                 {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
+using dynperf.Builders;
 using dynperf.Models;
 using Microsoft.Extensions.Logging;
 
@@ -22,12 +24,16 @@ namespace dynperf.Repositories
         {
             _logger = logger;
 
-            TargetProcessEntries = LoadTargetList();
             InitializeFileWatcher();
         }
 
-        public ReadOnlyCollection<TargetProcessEntry> GetEntries()
+        public async Task<ReadOnlyCollection<TargetProcessEntry>> GetEntries()
         {
+            if (TargetProcessEntries == null)
+            {
+                TargetProcessEntries = await LoadTargetList().ConfigureAwait(false);
+            }
+
             return TargetProcessEntries.AsReadOnly();
         }
 
@@ -44,38 +50,36 @@ namespace dynperf.Repositories
             FileWatcher.EnableRaisingEvents = true;
         }
 
-        private void OnTargetsFileChange(object sender, FileSystemEventArgs e)
+        private async void OnTargetsFileChange(object sender, FileSystemEventArgs e)
         {
             _logger.LogInformation("Targets file change detected, loading");
-            TargetProcessEntries = LoadTargetList();
+            TargetProcessEntries = await LoadTargetList().ConfigureAwait(false);
         }
 
-        private List<TargetProcessEntry> LoadTargetList()
+        private async Task<List<TargetProcessEntry>> LoadTargetList()
         {
             var targetsFile = $"{ConfigurationFolder}/{TargetsFileName}";
 
             if (File.Exists(targetsFile))
             {
-                var targetInput = File.ReadAllText(targetsFile);
-                var serializedInput = JsonSerializer.Deserialize<List<TargetProcessEntry>>(targetInput);
-
+                using var stream = new FileStream(targetsFile, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 4092, useAsync: true);
+                var serializedInput = await JsonSerializer.DeserializeAsync<List<TargetProcessEntry>>(stream).ConfigureAwait(false);
                 _logger.LogInformation($"targets file with {serializedInput.Count} targets loaded");
-
                 return serializedInput;
             }
-            else
-            {
-                WriteDefaultTargets();
-            }
 
-            _logger.LogInformation("Default targets file loaded");
+            await WriteDefaultTargets().ConfigureAwait(false);
+            _logger.LogWarning("Writing defaults json");
             return new List<TargetProcessEntry>();
         }
 
-        private void WriteDefaultTargets()
+        private async Task WriteDefaultTargets()
         {
             var targetsFile = $"{ConfigurationFolder}/{TargetsFileName}";
-            File.Copy("Defaults/targets.json", targetsFile);
+            var defaults = DefaultTargets.GetDefaults();
+
+            using var stream = new FileStream(targetsFile, FileMode.CreateNew, FileAccess.Write, FileShare.Write, bufferSize: 4092, useAsync: true);
+            await JsonSerializer.SerializeAsync(stream, defaults, new JsonSerializerOptions() { WriteIndented = true }).ConfigureAwait(false);
         }
     }
 }
