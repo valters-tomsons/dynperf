@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ "$EUID" -ne 0 ]
   then echo -e "\e[33m Run as root!"
@@ -15,5 +15,5 @@ if ! test -f "$FILE"; then
 fi
 
 # Copy binary
-cd ./bin
+cd bin
 cp dynperf /usr/bin/dynperf
