@@ -8,11 +8,13 @@ namespace dynperf.Builders
         private static readonly List<TargetProcessEntry> defaults = new List<TargetProcessEntry>()
         {
             new TargetProcessEntry("gameoverlayui", "Steam (Game Overlay)"),
+            new TargetProcessEntry("vkcube", "vulkan test application"),
 
             new TargetProcessEntry("retroarch", "Retroarch Emulator Frontend"),
             new TargetProcessEntry("PCSX2", "PlayStation 2 Emualtor"),
             new TargetProcessEntry("rpcs3", "PlayStation 3 Emulator"),
-            new TargetProcessEntry("Cemu", "Wii U Emulator"),
+            new TargetProcessEntry("cemu", "Wii U mulator"),
+            new TargetProcessEntry("yemu", "a Switch Emulator"),
 
             new TargetProcessEntry("League of Legends"),
             new TargetProcessEntry("Civ6", "Civilization VI"),
