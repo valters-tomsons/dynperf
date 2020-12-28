@@ -14,7 +14,7 @@ namespace dynperf.Builders
             new TargetProcessEntry("PCSX2", "PlayStation 2 Emualtor"),
             new TargetProcessEntry("rpcs3", "PlayStation 3 Emulator"),
             new TargetProcessEntry("cemu", "Wii U mulator"),
-            new TargetProcessEntry("yemu", "a Switch Emulator"),
+            new TargetProcessEntry("yuzu", "Switch Emulator"),
 
             new TargetProcessEntry("League of Legends"),
             new TargetProcessEntry("Civ6", "Civilization VI"),
