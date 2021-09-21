@@ -11,17 +11,17 @@ namespace dynperf.Services
     public class TargetProcessMonitor
     {
         private readonly TargetProgramRepository _targetRepo;
-        private ReadOnlyCollection<TargetProcessEntry> _targets { get; set; }
+        private ReadOnlyCollection<TargetProcessEntry> Targets { get; set; }
 
         public TargetProcessMonitor(TargetProgramRepository targetRepo)
         {
             _targetRepo = targetRepo;
         }
 
-        public async Task<int> RunningTargetCount()
+        public async Task<IEnumerable<string>> GetRunningTargets()
         {
-            _targets = await _targetRepo.GetEntries().ConfigureAwait(false);
-            return MonitorProcesses().Count();
+            Targets = await _targetRepo.GetEntries().ConfigureAwait(false);
+            return MonitorProcesses();
         }
 
         private IEnumerable<string> MonitorProcesses()
@@ -33,7 +33,7 @@ namespace dynperf.Services
 
         private bool FilterTarget(Process target)
         {
-            return _targets.Any(x => target.ProcessName.Equals(x.ProcessName));
+            return Targets.Any(x => target.ProcessName.Equals(x.ProcessName));
         }
     }
 }
